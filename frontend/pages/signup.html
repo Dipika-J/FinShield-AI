@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinShield AI - Employee Signup</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">FINSHIELD <span>AI</span></div>
+    <div class="status">SECURE ACCESS</div>
+</div>
+
+<div style="display:flex;justify-content:center;align-items:center;min-height:90vh">
+
+<div class="risk-panel" style="width:450px">
+
+    <p class="tag">SECURE EMPLOYEE REGISTRATION</p>
+
+    <h1 style="font-size:36px">Create Employee Account</h1>
+
+    <input id="name" placeholder="Employee Name"
+        style="width:100%;padding:14px;margin-top:10px">
+
+    <input id="employeeId" placeholder="Employee ID"
+        style="width:100%;padding:14px;margin-top:10px">
+
+    <input id="email" type="email" placeholder="Official Email"
+        style="width:100%;padding:14px;margin-top:10px">
+
+    <input id="password" type="password" placeholder="Password"
+        style="width:100%;padding:14px;margin-top:10px">
+
+    <div style="
+        margin-top:20px;
+        padding:18px;
+        background:#f5f5f5;
+        border:1px solid #d0d0d0;
+        border-radius:5px;
+        color:#222;
+    ">
+
+        <label style="
+            display:flex;
+            align-items:center;
+            gap:12px;
+            cursor:pointer;
+            font-size:15px;
+        ">
+
+            <input
+                type="checkbox"
+                id="robotCheck"
+                style="width:22px;height:22px"
+            >
+
+            <span>I'm not a robot</span>
+
+        </label>
+
+        <div style="
+            margin-top:8px;
+            font-size:11px;
+            color:#777;
+        ">
+            Protected by FinShield Security Verification
+        </div>
+
+    </div>
+
+    <button onclick="signup()" style="width:100%">
+        CREATE ACCOUNT
+    </button>
+
+    <p id="message"></p>
+
+</div>
+
+</div>
+
+<script>
+async function signup() {
+
+    const name = document.getElementById("name").value;
+    const employeeId = document.getElementById("employeeId").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const verified = document.getElementById("robotCheck").checked;
+
+    if (!name || !employeeId || !email || !password) {
+        document.getElementById("message").innerText =
+            "Please fill all fields.";
+        return;
+    }
+
+    if (!verified) {
+        document.getElementById("message").innerText =
+            "Please complete security verification.";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/api/auth/signup",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    employee_id: employeeId,
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            document.getElementById("message").innerText =
+                data.detail || "Signup failed.";
+            return;
+        }
+
+        document.getElementById("message").innerText =
+            "Account created successfully!";
+
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1000);
+
+    } catch (error) {
+
+        document.getElementById("message").innerText =
+            "Backend connection failed.";
+
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+

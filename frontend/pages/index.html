@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinShield AI</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">FINSHIELD <span>AI</span></div>
+    <div class="status">
+        ? AI ENGINE ACTIVE
+    </div>
+</div>
+
+<div class="hero">
+
+    <div class="hero-text">
+        <p class="tag">AI-POWERED FINANCIAL SECURITY</p>
+
+        <h1>Real-Time AI-Powered<br>
+        <span>Fraud Prevention</span></h1>
+
+        <p>
+            FinShield AI analyzes financial transactions before
+            final approval and identifies suspicious activity using
+            Random Forest intelligence.
+        </p>
+
+        <button onclick="analyzeTransaction()">
+            Analyze Transaction
+        </button>
+    </div>
+
+    <div class="risk-panel">
+
+        <div class="panel-title">
+            LIVE RISK ANALYSIS
+        </div>
+
+        <div id="status">Waiting for transaction...</div>
+
+        <div class="risk-score" id="score">--</div>
+
+        <div id="level">RISK SCORE</div>
+
+        <div class="factors" id="factors">
+            No transaction analyzed
+        </div>
+
+        <div class="action" id="action">
+            --
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../js/app.js"></script>
+
+</body>
+</html>

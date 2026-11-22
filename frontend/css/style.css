@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #071018;
+    color: white;
+}
+
+.navbar {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    border-bottom: 1px solid #1b2b38;
+    background: #09141d;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #39d98a;
+}
+
+.status {
+    color: #39d98a;
+    font-size: 13px;
+}
+
+.hero {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 70px 10%;
+    gap: 80px;
+}
+
+.hero-text {
+    max-width: 650px;
+}
+
+.tag {
+    color: #39d98a;
+    letter-spacing: 3px;
+    font-size: 12px;
+}
+
+h1 {
+    font-size: 58px;
+    line-height: 1.05;
+    margin: 20px 0;
+}
+
+h1 span {
+    color: #39d98a;
+}
+
+.hero-text p {
+    color: #9aabb8;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+button {
+    margin-top: 25px;
+    padding: 15px 28px;
+    border: none;
+    border-radius: 8px;
+    background: #39d98a;
+    color: #06110b;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.risk-panel {
+    width: 390px;
+    min-height: 430px;
+    padding: 30px;
+    border: 1px solid #263b49;
+    border-radius: 18px;
+    background: #0d1b25;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+.panel-title {
+    color: #8da0ad;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+#status {
+    margin-top: 25px;
+    color: #9aabb8;
+}
+
+.risk-score {
+    font-size: 90px;
+    font-weight: bold;
+    margin-top: 25px;
+    color: #39d98a;
+}
+
+#level {
+    color: #9aabb8;
+    letter-spacing: 2px;
+}
+
+.factors {
+    margin-top: 30px;
+    line-height: 2;
+    color: #d8e1e7;
+}
+
+.action {
+    margin-top: 20px;
+    padding: 14px;
+    text-align: center;
+    border-radius: 8px;
+    background: #182a35;
+    font-weight: bold;
+}

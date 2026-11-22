@@ -1,0 +1,873 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FINSHIELD AI | Secure Access</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(14,165,233,.10),transparent 28%),
+        radial-gradient(circle at 85% 80%,rgba(37,99,235,.09),transparent 30%),
+        #050c15;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+/* MAIN */
+
+.shell{
+    width:100%;
+    max-width:1080px;
+    min-height:650px;
+
+    display:grid;
+    grid-template-columns:48% 52%;
+
+    background:rgba(10,22,36,.96);
+
+    border:1px solid rgba(89,120,150,.28);
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.60),
+        0 0 80px rgba(14,165,233,.04);
+}
+
+/* LEFT */
+
+.left{
+    position:relative;
+
+    padding:65px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #091a2a 0%,
+            #071321 55%,
+            #06101b 100%
+        );
+
+    border-right:1px solid rgba(89,120,150,.20);
+}
+
+.left::before{
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(56,189,248,.10);
+
+    top:-100px;
+    right:-100px;
+}
+
+.logo{
+    font-size:29px;
+    font-weight:800;
+    letter-spacing:3px;
+}
+
+.logo span{
+    color:#38bdf8;
+}
+
+.access{
+    margin-top:9px;
+
+    color:#6dd3ff;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:3px;
+}
+
+.shield{
+    width:82px;
+    height:82px;
+
+    margin:45px 0 28px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:34px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #12324a,
+            #0b1d2e
+        );
+
+    border:1px solid #2a607d;
+
+    box-shadow:
+        0 0 35px rgba(56,189,248,.10),
+        inset 0 0 25px rgba(56,189,248,.05);
+}
+
+.system{
+    color:#6de7a0;
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:18px;
+}
+
+.left h1{
+    font-size:39px;
+
+    line-height:1.12;
+
+    letter-spacing:-1px;
+
+    margin-bottom:20px;
+}
+
+.left p{
+    max-width:390px;
+
+    color:#8ea2b7;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+.live{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:45px;
+
+    color:#8da1b5;
+
+    font-size:11px;
+
+    letter-spacing:.8px;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+        0 0 8px #22c55e,
+        0 0 18px rgba(34,197,94,.4);
+}
+
+/* RIGHT */
+
+.right{
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:55px 65px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0c1a2a,
+            #0a1624
+        );
+}
+
+.login{
+    width:100%;
+    max-width:400px;
+}
+
+.heading{
+    margin-bottom:34px;
+}
+
+.heading h2{
+    font-size:31px;
+
+    font-weight:700;
+
+    letter-spacing:-.5px;
+
+    margin-bottom:10px;
+}
+
+.heading p{
+    color:#8296aa;
+
+    font-size:13px;
+
+    line-height:1.6;
+}
+
+/* INPUT */
+
+.field{
+    margin-bottom:21px;
+}
+
+.field label{
+    display:block;
+
+    color:#b8c7d6;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:9px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap input{
+    width:100%;
+    height:52px;
+
+    border-radius:9px;
+
+    border:1px solid #294157;
+
+    background:#07121e;
+
+    color:#fff;
+
+    padding:0 16px;
+
+    font-size:13px;
+
+    outline:none;
+
+    transition:.2s;
+}
+
+.input-wrap input::placeholder{
+    color:#4f6479;
+}
+
+.input-wrap input:focus{
+    border-color:#38bdf8;
+
+    box-shadow:
+        0 0 0 3px rgba(56,189,248,.08);
+}
+
+/* EYE */
+
+.eye{
+    position:absolute;
+
+    right:15px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    border:0;
+
+    background:none;
+
+    color:#71869a;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    padding:4px;
+}
+
+.eye:hover{
+    color:#38bdf8;
+}
+
+/* ROBOT */
+
+.robot{
+    min-height:64px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 15px;
+
+    margin:5px 0 23px;
+
+    border-radius:9px;
+
+    background:#07121e;
+
+    border:1px solid #294157;
+
+    transition:.2s;
+}
+
+.robot:hover{
+    border-color:#38566f;
+}
+
+.robot input{
+    width:20px;
+    height:20px;
+
+    cursor:pointer;
+
+    accent-color:#0ea5e9;
+}
+
+.robot-content{
+    flex:1;
+}
+
+.robot-title{
+    color:#dce7f0;
+
+    font-size:13px;
+
+    line-height:1.3;
+}
+
+.robot-sub{
+    color:#566d82;
+
+    font-size:9px;
+
+    margin-top:4px;
+}
+
+.robot-symbol{
+    width:30px;
+    height:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:6px;
+
+    color:#38bdf8;
+
+    border:1px solid #23455e;
+
+    background:#0b1e2e;
+
+    font-size:15px;
+}
+
+/* BUTTON */
+
+button.login-btn{
+    width:100%;
+    height:52px;
+
+    border:0;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0ea5e9,
+            #2563eb
+        );
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:1.2px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px rgba(14,165,233,.15);
+
+    transition:.2s;
+}
+
+button.login-btn:hover{
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 14px 30px rgba(14,165,233,.22);
+}
+
+button.login-btn:active{
+    transform:translateY(0);
+}
+
+button.login-btn:disabled{
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+/* MESSAGE */
+
+.message{
+    min-height:22px;
+
+    text-align:center;
+
+    margin-top:14px;
+
+    font-size:12px;
+}
+
+/* FOOTER */
+
+.footer{
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:29px;
+
+    padding-top:19px;
+
+    border-top:1px solid #203448;
+
+    color:#5d7287;
+
+    font-size:9px;
+
+    letter-spacing:.7px;
+}
+
+.footer span{
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    body{
+        padding:15px;
+    }
+
+    .shell{
+        max-width:450px;
+
+        grid-template-columns:1fr;
+
+        min-height:auto;
+    }
+
+    .left{
+        display:none;
+    }
+
+    .right{
+        padding:45px 28px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="shell">
+
+    <!-- LEFT SIDE -->
+
+    <section class="left">
+
+        <div class="logo">
+            FINSHIELD <span>AI</span>
+        </div>
+
+        <div class="access">
+            SECURE ACCESS
+        </div>
+
+        <div class="shield">
+            🔐
+        </div>
+
+        <div class="system">
+            ● SYSTEM SECURE
+        </div>
+
+        <h1>
+            FINANCIAL<br>
+            SECURITY PLATFORM
+        </h1>
+
+        <p>
+            Secure access for fraud analysts and
+            transaction monitoring teams.
+        </p>
+
+        <div class="live">
+            <span class="live-dot"></span>
+
+            AI MONITORING ACTIVE
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+
+    <section class="right">
+
+        <div class="login">
+
+            <div class="heading">
+
+                <h2>
+                    Employee Login
+                </h2>
+
+                <p>
+                    Secure access for fraud analysts and
+                    transaction monitoring teams.
+                </p>
+
+            </div>
+
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="field">
+
+                    <label>
+                        OFFICIAL EMAIL
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="field">
+
+                    <label>
+                        PASSWORD
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="eye"
+                            id="eyeButton"
+                            aria-label="Show password"
+                        >
+                            ◉
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ROBOT -->
+
+                <div class="robot">
+
+                    <input
+                        type="checkbox"
+                        id="robot"
+                    >
+
+                    <div class="robot-content">
+
+                        <div class="robot-title">
+                            I'm not a robot
+                        </div>
+
+                        <div class="robot-sub">
+                            FINSHIELD AI security verification
+                        </div>
+
+                    </div>
+
+                    <div class="robot-symbol">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="loginBtn"
+                >
+                    SIGN IN SECURELY
+                </button>
+
+
+                <div
+                    class="message"
+                    id="message"
+                ></div>
+
+
+            </form>
+
+
+            <div class="footer">
+
+                <span>
+                    ● ENCRYPTED SESSION
+                </span>
+
+                <span>
+                    AI MONITORING ACTIVE
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+/* PASSWORD EYE */
+
+const password =
+    document.getElementById("password");
+
+const eyeButton =
+    document.getElementById("eyeButton");
+
+let passwordVisible = false;
+
+eyeButton.addEventListener("click", function(){
+
+    passwordVisible = !passwordVisible;
+
+    if(passwordVisible){
+
+        password.type = "text";
+
+        eyeButton.textContent = "◉";
+
+        eyeButton.style.color = "#38bdf8";
+
+    }else{
+
+        password.type = "password";
+
+        eyeButton.textContent = "◉";
+
+        eyeButton.style.color = "#71869a";
+
+    }
+
+});
+
+
+/* LOGIN */
+
+const form =
+    document.getElementById("loginForm");
+
+const robot =
+    document.getElementById("robot");
+
+const button =
+    document.getElementById("loginBtn");
+
+const message =
+    document.getElementById("message");
+
+
+form.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    message.textContent = "";
+
+
+    /* ROBOT CHECK */
+
+    if(!robot.checked){
+
+        message.style.color = "#f87171";
+
+        message.textContent =
+            "Please confirm that you are not a robot.";
+
+        return;
+    }
+
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const passwordValue =
+        document.getElementById("password").value;
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "AUTHENTICATING...";
+
+
+    try{
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/api/auth/login",
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+                    email:email,
+                    password:passwordValue
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.detail ||
+                "Invalid employee credentials"
+            );
+
+        }
+
+
+        sessionStorage.setItem(
+            "employee",
+            JSON.stringify(data.employee)
+        );
+
+
+        message.style.color =
+            "#4ade80";
+
+        message.textContent =
+            "Authentication successful...";
+
+
+        setTimeout(function(){
+
+            window.location.href =
+                "app.html";
+
+        },700);
+
+
+    }catch(error){
+
+        message.style.color =
+            "#f87171";
+
+        message.textContent =
+            error.message;
+
+        button.disabled = false;
+
+        button.textContent =
+            "SIGN IN SECURELY";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+
+

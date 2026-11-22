@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinShield AI - Employee Login</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">FINSHIELD <span>AI</span></div>
+    <div class="status">SECURE ACCESS</div>
+</div>
+
+<div style="display:flex;justify-content:center;align-items:center;height:85vh">
+
+<div class="risk-panel" style="width:420px">
+
+    <p class="tag">FINANCIAL SECURITY PLATFORM</p>
+
+    <h1 style="font-size:36px">Employee Login</h1>
+
+    <p>Secure access for fraud analysts and transaction monitoring teams.</p>
+
+    <input id="email" placeholder="Official Email"
+        style="width:100%;padding:15px;margin-top:15px;border-radius:8px;border:1px solid #263b49;background:#071018;color:white">
+
+    <input id="password" type="password" placeholder="Password"
+        style="width:100%;padding:15px;margin-top:15px;border-radius:8px;border:1px solid #263b49;background:#071018;color:white">
+
+    <button onclick="login()" style="width:100%">SIGN IN</button>
+
+    <p id="loginMessage"></p>
+
+</div>
+
+</div>
+
+<script>
+function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        document.getElementById("loginMessage").innerText =
+            "Enter email and password";
+        return;
+    }
+
+    localStorage.setItem("finshield_user", email);
+    window.location.href = "app.html";
+}
+</script>
+
+</body>
+</html>
+

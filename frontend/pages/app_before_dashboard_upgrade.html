@@ -1,0 +1,908 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinShield AI | Security Operations Center</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Inter,Segoe UI,Arial,sans-serif;
+background:#071019;
+color:#e8eef5;
+min-height:100vh;
+}
+
+button{font-family:inherit;cursor:pointer}
+
+.header{
+height:72px;
+background:#08131d;
+border-bottom:1px solid #1b2d3a;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 32px;
+position:sticky;
+top:0;
+z-index:10;
+}
+
+.brand{display:flex;align-items:center;gap:13px}
+
+.logo{
+width:40px;height:40px;border-radius:11px;
+background:linear-gradient(135deg,#00d4ff,#0077ff);
+display:flex;align-items:center;justify-content:center;
+font-weight:900;font-size:20px;
+}
+
+.brand-title{font-size:17px;font-weight:900;letter-spacing:1.5px}
+.brand-sub{font-size:10px;color:#718493;letter-spacing:1.4px;margin-top:3px}
+
+.status{
+display:flex;align-items:center;gap:9px;
+font-size:11px;font-weight:800;color:#66efb5;
+letter-spacing:1px;
+}
+
+.dot{
+width:8px;height:8px;border-radius:50%;
+background:#2be99c;
+box-shadow:0 0 12px #2be99c;
+}
+
+.container{max-width:1450px;margin:auto;padding:32px}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+margin-bottom:25px;
+}
+
+.eyebrow{
+color:#00c8ff;
+font-size:10px;
+font-weight:900;
+letter-spacing:2px;
+margin-bottom:9px;
+}
+
+h1{font-size:31px;margin-bottom:8px}
+.hero p{font-size:13px;color:#7f919f}
+
+.controls{display:flex;gap:9px;flex-wrap:wrap}
+
+.btn{
+padding:11px 15px;
+border-radius:8px;
+border:1px solid #294151;
+background:#10222e;
+color:#dce8ee;
+font-size:10px;
+font-weight:900;
+letter-spacing:.5px;
+}
+
+.btn:hover{border-color:#00c8ff}
+
+.btn-danger{
+background:#32151c;
+border-color:#6c2935;
+color:#ff9aa5;
+}
+
+.btn-live{
+background:#07372d;
+border-color:#0c765f;
+color:#69f5c3;
+}
+
+.status-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:11px;
+margin-bottom:17px;
+}
+
+.status-card{
+background:#0c1822;
+border:1px solid #1a2d3b;
+border-radius:11px;
+padding:15px 18px;
+}
+
+.label{
+font-size:9px;
+color:#6e8290;
+letter-spacing:1.5px;
+text-transform:uppercase;
+}
+
+.value{
+font-size:13px;
+font-weight:900;
+margin-top:7px;
+}
+
+.green{color:#64eeb4}
+
+.layout{
+display:grid;
+grid-template-columns:1.35fr .85fr;
+gap:17px;
+}
+
+.panel{
+background:#0b1721;
+border:1px solid #1b2e3c;
+border-radius:13px;
+overflow:hidden;
+}
+
+.panel-head{
+padding:17px 19px;
+border-bottom:1px solid #192b37;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.title{
+font-size:12px;
+font-weight:900;
+letter-spacing:1px;
+}
+
+.sub{
+font-size:10px;
+color:#687b88;
+margin-top:4px;
+}
+
+.live{
+font-size:9px;
+font-weight:900;
+letter-spacing:1px;
+color:#63efb5;
+}
+
+.transaction{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:17px 19px;
+border-bottom:1px solid #142630;
+cursor:pointer;
+transition:.2s;
+}
+
+.transaction:hover{
+background:#10212d;
+}
+
+.txleft{
+display:flex;
+align-items:center;
+gap:13px;
+}
+
+.txicon{
+width:40px;height:40px;
+border-radius:9px;
+background:#162a37;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:10px;
+font-weight:900;
+color:#61dfff;
+}
+
+.txid{font-size:12px;font-weight:900}
+.meta{font-size:10px;color:#6e8290;margin-top:5px}
+
+.txright{text-align:right}
+.amount{font-size:13px;font-weight:900}
+
+.pill{
+display:inline-block;
+margin-top:5px;
+padding:4px 8px;
+border-radius:20px;
+font-size:8px;
+font-weight:900;
+letter-spacing:.7px;
+}
+
+.critical{background:#421923;color:#ff8997}
+.high{background:#3d2a14;color:#ffc86e}
+.medium{background:#352f14;color:#e9d46d}
+.low{background:#10372d;color:#68eebe}
+
+.ai{
+padding:21px;
+}
+
+.scorebox{
+display:flex;
+align-items:center;
+gap:22px;
+}
+
+.circle{
+width:132px;height:132px;
+border-radius:50%;
+border:8px solid #233b48;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+.score{
+font-size:38px;
+font-weight:900;
+}
+
+.score-caption{
+font-size:8px;
+color:#718492;
+letter-spacing:1px;
+}
+
+.risk{
+font-size:13px;
+font-weight:900;
+color:#ff8492;
+letter-spacing:1px;
+margin-bottom:8px;
+}
+
+.prob{
+font-size:11px;
+color:#82939e;
+}
+
+.prob strong{color:white}
+
+.recommend{
+margin-top:19px;
+padding:14px;
+border-radius:9px;
+background:#21151a;
+border:1px solid #47252d;
+}
+
+.rec-label{
+font-size:8px;
+color:#778994;
+letter-spacing:1.4px;
+}
+
+.rec-value{
+font-size:18px;
+font-weight:900;
+color:#ff8997;
+margin-top:5px;
+}
+
+.section{
+margin-top:20px;
+}
+
+.section-title{
+font-size:9px;
+color:#718591;
+font-weight:900;
+letter-spacing:1.4px;
+margin-bottom:10px;
+}
+
+.factor{
+padding:10px 11px;
+border:1px solid #172c39;
+background:#0d1c26;
+border-radius:7px;
+font-size:10px;
+margin-bottom:6px;
+color:#c7d2d9;
+}
+
+.factor:before{
+content:"";
+display:inline-block;
+width:6px;height:6px;
+border-radius:50%;
+background:#ff6577;
+margin-right:8px;
+}
+
+.behaviour{
+padding:18px;
+}
+
+.behaviour-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.behaviour-item{
+padding:12px;
+border:1px solid #172c39;
+background:#0d1c26;
+border-radius:8px;
+}
+
+.behaviour-item span{
+font-size:8px;
+color:#6d818d;
+letter-spacing:1px;
+display:block;
+}
+
+.behaviour-item strong{
+display:block;
+font-size:12px;
+margin-top:6px;
+}
+
+.investigation{
+padding:19px;
+}
+
+.detail-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.detail{
+background:#0d1c26;
+border:1px solid #172b38;
+border-radius:8px;
+padding:11px;
+}
+
+.detail span{
+display:block;
+font-size:8px;
+color:#6c808c;
+letter-spacing:1px;
+}
+
+.detail strong{
+display:block;
+font-size:12px;
+margin-top:5px;
+}
+
+.action-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:12px;
+}
+
+.action{
+padding:12px;
+border-radius:8px;
+border:1px solid #263d4a;
+background:#12232e;
+color:#dbe6ec;
+font-size:9px;
+font-weight:900;
+}
+
+.action:hover{
+border-color:#00c8ff;
+}
+
+.timeline{
+padding:18px;
+}
+
+.event{
+display:flex;
+gap:11px;
+padding-bottom:15px;
+}
+
+.event-dot{
+width:7px;height:7px;
+background:#00c8ff;
+border-radius:50%;
+margin-top:3px;
+flex-shrink:0;
+box-shadow:0 0 9px rgba(0,200,255,.5);
+}
+
+.event strong{
+display:block;
+font-size:10px;
+}
+
+.event span{
+display:block;
+font-size:9px;
+color:#687d89;
+margin-top:3px;
+}
+
+.alert{
+position:fixed;
+right:22px;
+bottom:22px;
+width:350px;
+padding:17px;
+border-radius:11px;
+background:#170c11;
+border:1px solid #792b3a;
+box-shadow:0 15px 50px rgba(0,0,0,.5);
+transform:translateY(130px);
+opacity:0;
+transition:.3s;
+z-index:50;
+}
+
+.alert.show{
+transform:translateY(0);
+opacity:1;
+}
+
+.alert-title{
+font-size:10px;
+font-weight:900;
+letter-spacing:1px;
+color:#ff7484;
+}
+
+.alert-text{
+font-size:10px;
+line-height:1.5;
+color:#bdc9d0;
+margin-top:6px;
+}
+
+.overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+z-index:40;
+}
+
+.drawer{
+position:fixed;
+right:0;
+top:0;
+height:100vh;
+width:470px;
+background:#09141e;
+border-left:1px solid #27404e;
+z-index:41;
+transform:translateX(100%);
+transition:.3s;
+overflow-y:auto;
+}
+
+.drawer.open{
+transform:translateX(0);
+}
+
+.drawer-head{
+padding:22px;
+border-bottom:1px solid #1b2e3b;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.close{
+background:none;
+border:0;
+color:#718693;
+font-size:22px;
+}
+
+.drawer-body{
+padding:22px;
+}
+
+.invest-title{
+font-size:18px;
+font-weight:900;
+margin-bottom:5px;
+}
+
+.invest-sub{
+font-size:10px;
+color:#6e8290;
+margin-bottom:20px;
+}
+
+.big-score{
+font-size:48px;
+font-weight:900;
+}
+
+.invest-risk{
+font-size:11px;
+font-weight:900;
+color:#ff8795;
+letter-spacing:1px;
+}
+
+@media(max-width:1000px){
+.layout{grid-template-columns:1fr}
+.status-grid{grid-template-columns:1fr 1fr}
+.hero{display:block}
+.controls{margin-top:18px}
+}
+
+@media(max-width:650px){
+.container{padding:17px}
+.header{padding:0 17px}
+.status-grid{grid-template-columns:1fr}
+.drawer{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="brand">
+<div class="logo">F</div>
+<div>
+<div class="brand-title">FINSHIELD AI</div>
+<div class="brand-sub">FINANCIAL SECURITY OPERATIONS CENTER</div>
+</div>
+</div>
+
+<div class="status">
+<span class="dot"></span>
+AI ENGINE ACTIVE
+</div>
+
+</header>
+
+<main class="container">
+
+<section class="hero">
+
+<div>
+<div class="eyebrow">REAL-TIME FRAUD PREVENTION</div>
+<h1>Security Operations Center</h1>
+<p>AI-powered pre-authorization protection for financial transactions.</p>
+</div>
+
+<div class="controls">
+<button class="btn" onclick="simulateNormal()">SIMULATE NORMAL</button>
+<button class="btn btn-danger" onclick="simulateFraud()">SIMULATE FRAUD</button>
+<button class="btn btn-live" onclick="startLive()">START LIVE MODE</button>
+</div>
+
+</section>
+
+<section class="status-grid">
+
+<div class="status-card">
+<div class="label">System Status</div>
+<div class="value green">SECURE</div>
+</div>
+
+<div class="status-card">
+<div class="label">AI Model</div>
+<div class="value">Random Forest • Online</div>
+</div>
+
+<div class="status-card">
+<div class="label">Transaction Gate</div>
+<div class="value green">PRE-AUTHORIZATION</div>
+</div>
+
+<div class="status-card">
+<div class="label">Threat Monitoring</div>
+<div class="value green">ACTIVE</div>
+</div>
+
+</section>
+
+<div class="layout">
+
+<section>
+
+<div class="panel">
+
+<div class="panel-head">
+<div>
+<div class="title">LIVE TRANSACTION STREAM</div>
+<div class="sub">Select a transaction to investigate</div>
+</div>
+<div class="live">● LIVE</div>
+</div>
+
+<div id="transactionList"></div>
+
+</div>
+
+<div class="panel" style="margin-top:17px">
+
+<div class="panel-head">
+<div>
+<div class="title">CUSTOMER BEHAVIOUR INTELLIGENCE</div>
+<div class="sub">Current activity compared with established behaviour</div>
+</div>
+</div>
+
+<div class="behaviour">
+
+<div class="behaviour-grid">
+
+<div class="behaviour-item">
+<span>Typical Transaction</span>
+<strong>Rs. 8,500</strong>
+</div>
+
+<div class="behaviour-item">
+<span>Current Transaction</span>
+<strong id="currentAmount">Waiting</strong>
+</div>
+
+<div class="behaviour-item">
+<span>Typical Device</span>
+<strong>Known Device</strong>
+</div>
+
+<div class="behaviour-item">
+<span>Current Device</span>
+<strong id="currentDevice">Waiting</strong>
+</div>
+
+<div class="behaviour-item">
+<span>Typical Activity</span>
+<strong>2-5 transactions</strong>
+</div>
+
+<div class="behaviour-item">
+<span>Current Frequency</span>
+<strong id="currentFrequency">Waiting</strong>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</section>
+
+<section>
+
+<div class="panel">
+
+<div class="panel-head">
+<div>
+<div class="title">PRE-AUTHORIZATION AI</div>
+<div class="sub">Current transaction risk assessment</div>
+</div>
+<div class="live">AI ANALYSIS</div>
+</div>
+
+<div class="ai">
+
+<div class="scorebox">
+
+<div class="circle">
+<div class="score" id="riskScore">--</div>
+<div class="score-caption">RISK / 100</div>
+</div>
+
+<div>
+<div class="risk" id="riskLevel">WAITING</div>
+<div class="prob">Fraud Probability: <strong id="fraudProbability">--</strong></div>
+</div>
+
+</div>
+
+<div class="recommend">
+
+<div class="rec-label">AI RECOMMENDED ACTION</div>
+<div class="rec-value" id="recommendation">WAITING FOR ANALYSIS</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">EXPLAINABLE AI • RISK INDICATORS</div>
+
+<div id="factors">
+<div class="factor">Waiting for transaction analysis...</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="panel" style="margin-top:17px">
+
+<div class="panel-head">
+<div>
+<div class="title">EMPLOYEE CONTROL</div>
+<div class="sub">Authorized transaction decision</div>
+</div>
+</div>
+
+<div class="investigation">
+
+<div class="action-grid">
+<button class="action" onclick="decision('APPROVE')">APPROVE</button>
+<button class="action" onclick="decision('VERIFY')">REQUEST VERIFICATION</button>
+<button class="action" onclick="decision('HOLD')">HOLD TRANSACTION</button>
+<button class="action" onclick="decision('BLOCK')">BLOCK TRANSACTION</button>
+</div>
+
+</div>
+
+</div>
+
+<div class="panel" style="margin-top:17px">
+
+<div class="panel-head">
+<div>
+<div class="title">LIVE INCIDENT TIMELINE</div>
+<div class="sub">Security events</div>
+</div>
+</div>
+
+<div class="timeline" id="timeline">
+
+<div class="event">
+<div class="event-dot"></div>
+<div>
+<strong>Monitoring started</strong>
+<span>FinShield AI is online</span>
+</div>
+</div>
+
+<div class="event">
+<div class="event-dot"></div>
+<div>
+<strong>Pre-authorization gate active</strong>
+<span>Transactions analysed before authorization</span>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+<div class="overlay" id="overlay" onclick="closeInvestigation()"></div>
+
+<aside class="drawer" id="drawer">
+
+<div class="drawer-head">
+
+<div>
+<div class="title">TRANSACTION INVESTIGATION</div>
+<div class="sub">FinShield security analysis</div>
+</div>
+
+<button class="close" onclick="closeInvestigation()">×</button>
+
+</div>
+
+<div class="drawer-body">
+
+<div class="invest-title" id="investId">TXN-FS-10000</div>
+<div class="invest-sub" id="investMeta">Transaction details</div>
+
+<div class="big-score" id="investScore">--</div>
+<div class="invest-risk" id="investLevel">WAITING</div>
+
+<div class="section">
+
+<div class="section-title">TRANSACTION DETAILS</div>
+
+<div class="detail-grid">
+
+<div class="detail">
+<span>AMOUNT</span>
+<strong id="investAmount">--</strong>
+</div>
+
+<div class="detail">
+<span>LOCATION</span>
+<strong id="investLocation">--</strong>
+</div>
+
+<div class="detail">
+<span>DEVICE</span>
+<strong id="investDevice">--</strong>
+</div>
+
+<div class="detail">
+<span>PAYMENT</span>
+<strong id="investPayment">--</strong>
+</div>
+
+<div class="detail">
+<span>FREQUENCY</span>
+<strong id="investFrequency">--</strong>
+</div>
+
+<div class="detail">
+<span>FAILED ATTEMPTS</span>
+<strong id="investFailed">--</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">AI RISK ANALYSIS</div>
+
+<div class="detail">
+<span>FRAUD PROBABILITY</span>
+<strong id="investProbability">--</strong>
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">RISK INDICATORS</div>
+
+<div id="investFactors"></div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">EMPLOYEE ACTION</div>
+
+<div class="action-grid">
+
+<button class="action" onclick="decision('VERIFY')">VERIFY</button>
+<button class="action" onclick="decision('HOLD')">HOLD</button>
+<button class="action" onclick="decision('BLOCK')">BLOCK</button>
+<button class="action" onclick="decision('APPROVE')">APPROVE</button>
+
+</div>
+
+</div>
+
+</div>
+
+</aside>
+
+<div class="alert" id="alertBox">
+
+<div class="alert-title">FINSHIELD SECURITY ALERT</div>
+
+<div class="alert-text" id="alertText">
+Suspicious transaction detected.
+</div>
+
+</div>
+
+
+
+<script src="dashboard.js"></script></body>
+</html>
+

@@ -1,0 +1,1035 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FINSHIELD AI</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07111f;
+    color:#eaf2fb;
+}
+
+button{font-family:inherit;cursor:pointer}
+
+.topbar{
+    height:70px;
+    border-bottom:1px solid #20344b;
+    background:#091725;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background:#1479ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+}
+
+.brand-name{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.brand-sub{
+    font-size:10px;
+    color:#7e94ad;
+    margin-top:3px;
+}
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.user-name{
+    font-size:13px;
+    color:#b9c9da;
+}
+
+.logout{
+    background:#15273b;
+    color:#d7e5f3;
+    border:1px solid #29425c;
+    padding:9px 14px;
+    border-radius:8px;
+}
+
+.page{
+    max-width:1450px;
+    margin:auto;
+    padding:28px;
+}
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:29px;
+    margin-bottom:7px;
+}
+
+.hero p{
+    color:#8399b0;
+    font-size:14px;
+}
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#0c2530;
+    border:1px solid #1d4d56;
+    padding:10px 15px;
+    border-radius:20px;
+    font-size:12px;
+    color:#62e0bb;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#35d39b;
+    box-shadow:0 0 10px #35d39b;
+}
+
+.controls{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+.action{
+    border:0;
+    padding:13px 18px;
+    border-radius:9px;
+    font-weight:700;
+    color:white;
+}
+
+.fraud{background:#c9364d}
+.normal{background:#15795b}
+.random{background:#286bc7}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#0b1a2b;
+    border:1px solid #20354b;
+    border-radius:13px;
+    padding:19px;
+}
+
+.card-label{
+    color:#71879f;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+}
+
+.big{
+    font-size:27px;
+    font-weight:800;
+    margin-top:9px;
+}
+
+.green{color:#44d5a4}
+.red{color:#ff6576}
+.blue{color:#5aa7ff}
+.yellow{color:#f4c95d}
+
+.main{
+    display:grid;
+    grid-template-columns:1.55fr .9fr;
+    gap:18px;
+}
+
+.section{
+    background:#0b1a2b;
+    border:1px solid #20354b;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.section-head{
+    padding:18px 20px;
+    border-bottom:1px solid #20354b;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.section-head h2{
+    font-size:15px;
+}
+
+.section-head span{
+    color:#71879f;
+    font-size:11px;
+}
+
+.transactions{
+    min-height:420px;
+}
+
+.tx{
+    padding:17px 20px;
+    border-bottom:1px solid #172b40;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.tx:hover{
+    background:#102238;
+}
+
+.tx-main{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    min-width:0;
+}
+
+.tx-icon{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background:#12283f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#6eafff;
+    font-weight:800;
+}
+
+.tx-id{
+    font-size:13px;
+    font-weight:700;
+}
+
+.tx-meta{
+    color:#71879f;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.tx-right{
+    text-align:right;
+    min-width:130px;
+}
+
+.amount{
+    font-weight:800;
+    font-size:14px;
+}
+
+.badge{
+    display:inline-block;
+    margin-top:6px;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:800;
+}
+
+.low{background:#123d32;color:#56dfad}
+.medium{background:#403a19;color:#f3d45c}
+.high{background:#492d1b;color:#ffad61}
+.critical{background:#4a1e2a;color:#ff7082}
+
+.status{
+    margin-top:5px;
+    color:#8fa5bb;
+    font-size:10px;
+}
+
+.right-column{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.ai{
+    padding:20px;
+}
+
+.score{
+    text-align:center;
+    margin:10px 0 20px;
+}
+
+.score-number{
+    font-size:55px;
+    font-weight:900;
+}
+
+.score-label{
+    color:#8298ae;
+    font-size:11px;
+}
+
+.factor{
+    display:flex;
+    gap:9px;
+    padding:10px 0;
+    border-bottom:1px solid #172b40;
+    font-size:12px;
+    color:#bdccda;
+}
+
+.factor span{
+    color:#ff6677;
+}
+
+.system{
+    padding:20px;
+}
+
+.system-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #172b40;
+    font-size:12px;
+}
+
+.ok{
+    color:#49d9a8;
+}
+
+.empty{
+    text-align:center;
+    padding:90px 20px;
+    color:#6f859b;
+    font-size:13px;
+}
+
+.drawer{
+    position:fixed;
+    right:0;
+    top:0;
+    width:430px;
+    max-width:100%;
+    height:100%;
+    background:#091725;
+    border-left:1px solid #284058;
+    box-shadow:-20px 0 60px rgba(0,0,0,.4);
+    transform:translateX(100%);
+    transition:.25s;
+    z-index:20;
+    overflow:auto;
+}
+
+.drawer.open{
+    transform:translateX(0);
+}
+
+.drawer-head{
+    padding:22px;
+    border-bottom:1px solid #20354b;
+    display:flex;
+    justify-content:space-between;
+}
+
+.close{
+    border:0;
+    background:#15283c;
+    color:white;
+    width:35px;
+    height:35px;
+    border-radius:8px;
+}
+
+.drawer-body{
+    padding:22px;
+}
+
+.detail{
+    padding:15px 0;
+    border-bottom:1px solid #20354b;
+}
+
+.detail-label{
+    color:#71879f;
+    font-size:10px;
+    text-transform:uppercase;
+}
+
+.detail-value{
+    margin-top:5px;
+    font-size:14px;
+}
+
+.open-customer{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    border:0;
+    border-radius:9px;
+    background:#1479ff;
+    color:white;
+    font-weight:800;
+}
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#10263b;
+    border:1px solid #2d4d68;
+    padding:15px 20px;
+    border-radius:10px;
+    display:none;
+    z-index:30;
+    box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+
+@media(max-width:1000px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .main{grid-template-columns:1fr}
+}
+
+@media(max-width:600px){
+    .topbar{padding:0 15px}
+    .page{padding:16px}
+    .hero{align-items:flex-start;gap:15px;flex-direction:column}
+    .grid{grid-template-columns:1fr}
+    .user-name{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+<div class="brand">
+<div class="logo">FS</div>
+<div>
+<div class="brand-name">FINSHIELD AI</div>
+<div class="brand-sub">FINANCIAL SECURITY OPERATIONS CENTER</div>
+</div>
+</div>
+
+<div class="user-area">
+<div class="user-name" id="employeeName">Bank Employee</div>
+<button class="logout" onclick="logout()">LOGOUT</button>
+</div>
+
+</header>
+
+<main class="page">
+
+<div class="hero">
+
+<div>
+<h1>Real-Time Fraud Prevention</h1>
+<p>AI-powered pre-authorization transaction monitoring and risk prevention.</p>
+</div>
+
+<div class="live">
+<div class="dot"></div>
+LIVE MONITORING
+</div>
+
+</div>
+
+<div class="controls">
+
+<button class="action normal" onclick="simulateNormal()">
+SIMULATE NORMAL
+</button>
+
+<button class="action fraud" onclick="simulateFraud()">
+SIMULATE FRAUD
+</button>
+
+<button class="action random" onclick="simulateRandom()">
+GENERATE TRANSACTION
+</button>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="card-label">Transactions monitored</div>
+<div class="big blue" id="total">0</div>
+</div>
+
+<div class="card">
+<div class="card-label">Approved</div>
+<div class="big green" id="approved">0</div>
+</div>
+
+<div class="card">
+<div class="card-label">Awaiting verification</div>
+<div class="big yellow" id="pending">0</div>
+</div>
+
+<div class="card">
+<div class="card-label">Blocked</div>
+<div class="big red" id="blocked">0</div>
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="section">
+
+<div class="section-head">
+<h2>LIVE TRANSACTION STREAM</h2>
+<span>PRE-AUTHORIZATION GATE</span>
+</div>
+
+<div class="transactions" id="transactionList">
+
+<div class="empty" id="empty">
+No transactions yet.<br>
+Use the simulator above to send a transaction through the AI engine.
+</div>
+
+</div>
+
+</div>
+
+<div class="right-column">
+
+<div class="section">
+
+<div class="section-head">
+<h2>AI RISK ANALYSIS</h2>
+<span>RANDOM FOREST</span>
+</div>
+
+<div class="ai">
+
+<div class="score">
+<div class="score-number" id="score">--</div>
+<div class="score-label">LATEST RISK SCORE / 100</div>
+</div>
+
+<div id="riskFactors">
+
+<div class="empty" style="padding:20px">
+Waiting for transaction analysis
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-head">
+<h2>SYSTEM STATUS</h2>
+<span>SECURE</span>
+</div>
+
+<div class="system">
+
+<div class="system-row">
+<span>AI Engine</span>
+<span class="ok">● ONLINE</span>
+</div>
+
+<div class="system-row">
+<span>Transaction Monitoring</span>
+<span class="ok">● ACTIVE</span>
+</div>
+
+<div class="system-row">
+<span>Pre-Authorization</span>
+<span class="ok">● ACTIVE</span>
+</div>
+
+<div class="system-row">
+<span>Customer Verification</span>
+<span class="ok">● READY</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+<div class="drawer" id="drawer">
+
+<div class="drawer-head">
+<div>
+<h2>Transaction Investigation</h2>
+<div style="color:#71879f;font-size:11px;margin-top:5px">
+AI SECURITY ANALYSIS
+</div>
+</div>
+
+<button class="close" onclick="closeDrawer()">×</button>
+
+</div>
+
+<div class="drawer-body" id="drawerBody"></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+if(!localStorage.getItem("finshield_user")){
+    window.location.href="login.html";
+}
+
+const employee =
+JSON.parse(localStorage.getItem("finshield_user") || "{}");
+
+document.getElementById("employeeName").textContent =
+employee.name || "Bank Employee";
+
+let transactions = [];
+
+const scenarios = {
+
+normal:[
+{
+amount:4200,
+hour:14,
+frequency:2,
+failed_attempts:0,
+location:"Chennai",
+device:"Known",
+payment_method:"UPI"
+},
+{
+amount:7800,
+hour:11,
+frequency:3,
+failed_attempts:0,
+location:"Coimbatore",
+device:"Known",
+payment_method:"Card"
+},
+{
+amount:12500,
+hour:16,
+frequency:1,
+failed_attempts:0,
+location:"Madurai",
+device:"Known",
+payment_method:"Net Banking"
+}
+],
+
+fraud:[
+{
+amount:85000,
+hour:2,
+frequency:15,
+failed_attempts:4,
+location:"Mumbai",
+device:"New",
+payment_method:"UPI"
+},
+{
+amount:125000,
+hour:3,
+frequency:18,
+failed_attempts:5,
+location:"Delhi",
+device:"New",
+payment_method:"Card"
+},
+{
+amount:210000,
+hour:1,
+frequency:14,
+failed_attempts:4,
+location:"Bengaluru",
+device:"New",
+payment_method:"UPI"
+},
+{
+amount:72500,
+hour:4,
+frequency:12,
+failed_attempts:3,
+location:"Hyderabad",
+device:"New",
+payment_method:"Card"
+},
+{
+amount:48500,
+hour:2,
+frequency:16,
+failed_attempts:4,
+location:"Kolkata",
+device:"New",
+payment_method:"Net Banking"
+}
+]
+
+};
+
+function pick(arr){
+    return arr[Math.floor(Math.random()*arr.length)];
+}
+
+async function sendTransaction(transaction){
+
+    showToast("Transaction received by FINSHIELD AI...");
+
+    try{
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/api/transactions/analyze",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(transaction)
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok){
+            showToast("AI analysis failed");
+            return;
+        }
+
+        const record = {
+            ...data,
+            input:transaction,
+            created:Date.now()
+        };
+
+        transactions.unshift(record);
+
+        renderTransaction(record);
+        updateStats();
+        showRisk(record);
+
+        if(data.analysis.risk_score >= 60){
+
+            showToast(
+                "⚠ High-risk transaction placed ON HOLD"
+            );
+
+        }else{
+
+            showToast(
+                "✓ Transaction approved by AI"
+            );
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Cannot connect to FINSHIELD AI backend"
+        );
+    }
+}
+
+function simulateNormal(){
+    sendTransaction(pick(scenarios.normal));
+}
+
+function simulateFraud(){
+    sendTransaction(pick(scenarios.fraud));
+}
+
+function simulateRandom(){
+
+    if(Math.random() < .55){
+        simulateFraud();
+    }else{
+        simulateNormal();
+    }
+
+}
+
+function renderTransaction(record){
+
+    const empty=document.getElementById("empty");
+
+    if(empty) empty.remove();
+
+    const list=document.getElementById("transactionList");
+
+    const tx=record.input;
+    const analysis=record.analysis;
+
+    let cls="low";
+
+    if(analysis.risk_level==="CRITICAL") cls="critical";
+    else if(analysis.risk_level==="HIGH") cls="high";
+    else if(analysis.risk_level==="MEDIUM") cls="medium";
+
+    const item=document.createElement("div");
+
+    item.className="tx";
+
+    item.innerHTML=`
+
+<div class="tx-main">
+
+<div class="tx-icon">TX</div>
+
+<div>
+
+<div class="tx-id">
+${record.transaction_id}
+</div>
+
+<div class="tx-meta">
+${tx.location} • ${tx.payment_method} • ${tx.device} Device
+</div>
+
+</div>
+
+</div>
+
+<div class="tx-right">
+
+<div class="amount">
+₹${Number(tx.amount).toLocaleString("en-IN")}
+</div>
+
+<div class="badge ${cls}">
+${analysis.risk_level} • ${analysis.risk_score}/100
+</div>
+
+<div class="status">
+${record.status}
+</div>
+
+</div>
+
+`;
+
+item.onclick=()=>{
+    openInvestigation(record);
+};
+
+list.prepend(item);
+
+}
+
+function openInvestigation(record){
+
+    const tx=record.input;
+    const a=record.analysis;
+
+    document.getElementById("drawerBody").innerHTML=`
+
+<div class="detail">
+<div class="detail-label">Transaction ID</div>
+<div class="detail-value">${record.transaction_id}</div>
+</div>
+
+<div class="detail">
+<div class="detail-label">Amount</div>
+<div class="detail-value">
+₹${Number(tx.amount).toLocaleString("en-IN")}
+</div>
+</div>
+
+<div class="detail">
+<div class="detail-label">Location</div>
+<div class="detail-value">${tx.location}</div>
+</div>
+
+<div class="detail">
+<div class="detail-label">Payment Method</div>
+<div class="detail-value">${tx.payment_method}</div>
+</div>
+
+<div class="detail">
+<div class="detail-label">Device</div>
+<div class="detail-value">${tx.device}</div>
+</div>
+
+<div class="detail">
+<div class="detail-label">AI Risk</div>
+<div class="detail-value">
+${a.risk_level} — ${a.risk_score}/100
+</div>
+</div>
+
+<div class="detail">
+<div class="detail-label">Recommended Action</div>
+<div class="detail-value">${a.recommended_action}</div>
+</div>
+
+<div style="margin-top:20px;font-weight:700">
+Explainable AI Risk Indicators
+</div>
+
+<div style="margin-top:10px">
+
+${
+a.risk_factors.length
+?
+a.risk_factors.map(x=>`
+<div class="factor">
+<span>⚠</span>${x}
+</div>
+`).join("")
+:
+`<div class="factor">
+<span>✓</span>No major risk indicators detected
+</div>`
+}
+
+</div>
+
+${
+a.risk_score >= 60
+?
+`<button class="open-customer"
+onclick="openCustomer('${record.transaction_id}')">
+OPEN CUSTOMER VERIFICATION
+</button>`
+:
+`<div style="margin-top:20px;color:#49d9a8;font-size:13px">
+✓ AI approved this transaction.
+</div>`
+}
+
+`;
+
+document.getElementById("drawer").classList.add("open");
+
+}
+
+function openCustomer(id){
+
+    const url =
+    "http://127.0.0.1:5500/pages/customer.html?transaction_id="
+    +encodeURIComponent(id);
+
+    window.open(url,"_blank");
+
+}
+
+function closeDrawer(){
+    document.getElementById("drawer").classList.remove("open");
+}
+
+function showRisk(record){
+
+    document.getElementById("score").textContent =
+        record.analysis.risk_score;
+
+    const factors=record.analysis.risk_factors;
+
+    document.getElementById("riskFactors").innerHTML=
+
+    factors.length
+
+    ?
+
+    factors.map(x=>`
+    <div class="factor">
+    <span>⚠</span>
+    ${x}
+    </div>
+    `).join("")
+
+    :
+
+    `<div class="factor">
+    <span>✓</span>
+    No major risk indicators detected
+    </div>`;
+
+}
+
+function updateStats(){
+
+    document.getElementById("total").textContent =
+        transactions.length;
+
+    document.getElementById("approved").textContent =
+        transactions.filter(x=>x.status==="APPROVED").length;
+
+    document.getElementById("pending").textContent =
+        transactions.filter(x=>
+            x.status==="AWAITING VERIFICATION"
+        ).length;
+
+    document.getElementById("blocked").textContent =
+        transactions.filter(x=>x.status==="BLOCKED").length;
+
+}
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.style.display="block";
+
+    setTimeout(()=>{
+        toast.style.display="none";
+    },3000);
+
+}
+
+function logout(){
+
+    localStorage.removeItem("finshield_user");
+
+    window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+</html>

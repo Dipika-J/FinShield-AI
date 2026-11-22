@@ -1,0 +1,446 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FinShield AI - Customer Verification</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07111f;
+    color:#eaf2ff;
+}
+
+.topbar{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 34px;
+    border-bottom:1px solid #1c3048;
+    background:#091525;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.logo{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#19c37d;
+    color:#04130d;
+    font-weight:900;
+}
+
+.secure{
+    color:#6ee7b7;
+    font-size:13px;
+}
+
+.container{
+    max-width:900px;
+    margin:55px auto;
+    padding:0 24px;
+}
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#9fb2ca;
+    text-decoration:none;
+    margin-bottom:28px;
+    font-size:14px;
+}
+
+.back:hover{
+    color:white;
+}
+
+.header{
+    margin-bottom:28px;
+}
+
+.eyebrow{
+    color:#19c37d;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1.5px;
+    margin-bottom:10px;
+}
+
+h1{
+    margin:0 0 10px;
+    font-size:34px;
+}
+
+.subtitle{
+    color:#91a4bb;
+    line-height:1.6;
+}
+
+.card{
+    background:#0b192b;
+    border:1px solid #1c3048;
+    border-radius:16px;
+    padding:28px;
+    margin-bottom:20px;
+}
+
+.status{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:20px;
+    background:#392b08;
+    color:#f5c84b;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.item{
+    padding:17px;
+    background:#081423;
+    border:1px solid #172940;
+    border-radius:10px;
+}
+
+.label{
+    color:#71859e;
+    font-size:12px;
+    margin-bottom:7px;
+}
+
+.value{
+    font-size:17px;
+    font-weight:600;
+}
+
+.risk{
+    color:#ffb84d;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:25px;
+}
+
+button{
+    border:0;
+    padding:16px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.verify{
+    background:#19c37d;
+    color:#03140d;
+}
+
+.reject{
+    background:#32131a;
+    color:#ff7180;
+    border:1px solid #68232d;
+}
+
+button:hover{
+    opacity:.88;
+}
+
+.message{
+    display:none;
+    padding:18px;
+    border-radius:10px;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+.success{
+    background:#0d3326;
+    color:#6ee7b7;
+    border:1px solid #1b7657;
+}
+
+.blocked{
+    background:#3a151b;
+    color:#ff7d89;
+    border:1px solid #762833;
+}
+
+.empty{
+    text-align:center;
+    padding:50px 20px;
+    color:#8295ad;
+}
+
+@media(max-width:650px){
+    .grid,.actions{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        padding:0 18px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="logo">F</div>
+        <div>FINSHIELD AI</div>
+    </div>
+
+    <div class="secure">
+        SECURE CUSTOMER VERIFICATION
+    </div>
+
+</header>
+
+<main class="container">
+
+    <a class="back" href="app.html">
+        ← Back to Security Operations Center
+    </a>
+
+    <div class="header">
+
+        <div class="eyebrow">
+            PRE-AUTHORIZATION SECURITY CHECK
+        </div>
+
+        <h1>Verify Your Transaction</h1>
+
+        <div class="subtitle">
+            FinShield AI has temporarily held this transaction because
+            the transaction risk requires customer confirmation before
+            authorization.
+        </div>
+
+    </div>
+
+    <div id="loading" class="card">
+        Loading transaction security details...
+    </div>
+
+    <div id="transactionCard" class="card" style="display:none">
+
+        <div class="status">
+            AWAITING YOUR CONFIRMATION
+        </div>
+
+        <div class="grid">
+
+            <div class="item">
+                <div class="label">TRANSACTION ID</div>
+                <div class="value" id="transactionId">--</div>
+            </div>
+
+            <div class="item">
+                <div class="label">AMOUNT</div>
+                <div class="value" id="amount">--</div>
+            </div>
+
+            <div class="item">
+                <div class="label">LOCATION</div>
+                <div class="value" id="location">--</div>
+            </div>
+
+            <div class="item">
+                <div class="label">DEVICE</div>
+                <div class="value" id="device">--</div>
+            </div>
+
+            <div class="item">
+                <div class="label">PAYMENT METHOD</div>
+                <div class="value" id="payment">--</div>
+            </div>
+
+            <div class="item">
+                <div class="label">AI RISK</div>
+                <div class="value risk">
+                    <span id="riskScore">--</span>/100
+                    —
+                    <span id="riskLevel">--</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="actions">
+
+            <button class="verify" onclick="verifyTransaction(true)">
+                ✓ YES, I AUTHORIZE THIS TRANSACTION
+            </button>
+
+            <button class="reject" onclick="verifyTransaction(false)">
+                ✕ NO, THIS WAS NOT ME
+            </button>
+
+        </div>
+
+        <div id="message" class="message"></div>
+
+    </div>
+
+</main>
+
+<script>
+
+const API="http://127.0.0.1:8000";
+
+const params=new URLSearchParams(window.location.search);
+
+const transactionId=params.get("transaction_id");
+
+async function loadTransaction(){
+
+    if(!transactionId){
+
+        document.getElementById("loading").innerHTML=
+            '<div class="empty">No transaction was supplied for verification.</div>';
+
+        return;
+    }
+
+    try{
+
+        const response=await fetch(
+            API+"/api/customer/transaction/"+
+            encodeURIComponent(transactionId)
+        );
+
+        const data=await response.json();
+
+        if(!response.ok){
+            throw new Error(data.detail || "Transaction not found");
+        }
+
+        document.getElementById("loading").style.display="none";
+
+        document.getElementById("transactionCard").style.display="block";
+
+        document.getElementById("transactionId").textContent=
+            data.transaction_id;
+
+        document.getElementById("amount").textContent=
+            "₹"+Number(data.amount).toLocaleString("en-IN");
+
+        document.getElementById("location").textContent=
+            data.location;
+
+        document.getElementById("device").textContent=
+            data.device;
+
+        document.getElementById("payment").textContent=
+            data.payment_method;
+
+        document.getElementById("riskScore").textContent=
+            data.risk_score;
+
+        document.getElementById("riskLevel").textContent=
+            data.risk_level;
+
+    }catch(error){
+
+        document.getElementById("loading").innerHTML=
+            '<div class="empty">Unable to load this transaction.<br><br>'+
+            error.message+'</div>';
+
+    }
+}
+
+async function verifyTransaction(verified){
+
+    try{
+
+        const response=await fetch(
+            API+"/api/customer/verify",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    transaction_id:transactionId,
+                    verified:verified
+                })
+            }
+        );
+
+        const data=await response.json();
+
+        if(!response.ok){
+            throw new Error(data.detail || "Verification failed");
+        }
+
+        const message=document.getElementById("message");
+
+        message.style.display="block";
+
+        if(verified){
+
+            message.className="message success";
+
+            message.textContent=
+                "✓ Transaction VERIFIED successfully. Returning to FinShield Security Operations Center...";
+
+        }else{
+
+            message.className="message blocked";
+
+            message.textContent=
+                "✕ Transaction BLOCKED. Security team has been notified. Returning to FinShield...";
+
+        }
+
+        setTimeout(function(){
+
+            window.location.href="app.html?v="+Date.now();
+
+        },2000);
+
+    }catch(error){
+
+        alert("Verification failed: "+error.message);
+
+    }
+}
+
+loadTransaction();
+
+</script>
+
+</body>
+</html>
